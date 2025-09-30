@@ -8,7 +8,7 @@ function MovieCard() {
 
     const [movies, setMovies] = useState([])
 
-    const REACT_APP_API_KEY = "348ce71605a67ed83960815f022c9856"
+    const API_KEY = import.meta.env.VITE_API_KEY;
 
     useEffect(() => {
         const DefaultMovies = async () => {
@@ -16,7 +16,7 @@ function MovieCard() {
                 const { data } = await axios.get(
                     `https://api.themoviedb.org/3/movie/popular`,
                     {
-                        params: {api_key: REACT_APP_API_KEY},
+                        params: {api_key: API_KEY},
                     }
                 )
                 setMovies(data.results)
@@ -31,7 +31,7 @@ function MovieCard() {
     const fetchMovie = async (name) => {
         try{
             const {data} = await axios.get(`https://api.themoviedb.org/3/search/movie`, {
-                params: {api_key: REACT_APP_API_KEY, query:name}
+                params: {api_key: API_KEY, query:name}
             })
             console.log(data.results)
             setMovies(data.results)
